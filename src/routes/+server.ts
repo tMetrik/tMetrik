@@ -7,7 +7,7 @@ import { StatusCodes } from "http-status-codes";
 export async function POST({ request }: { request: Request }) {
 	const id = crypto.randomUUID().toUpperCase();
 	const url = new URL(request.url);
-	const key = url.searchParams.get("key")?.toLowerCase();
+	const key = url.searchParams.get("key")?.toLowerCase() ?? request.headers.get("x-api-key")?.toLowerCase();
 	if (!key || !keys.includes(key)) {
 		return errStatus(StatusCodes.UNAUTHORIZED);
 	}
