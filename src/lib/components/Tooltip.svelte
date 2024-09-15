@@ -22,7 +22,7 @@ onMount(() => {
 	hoverHover.addEventListener("change", () => {
 		isDesktop = hoverHover.matches;
 	});
-	for (const event of ["click", "mouseenter"]) {
+	for (const event of ["click", "mouseover", "mouseenter"]) {
 		addEventListener(
 			event,
 			(e) => {
@@ -79,24 +79,26 @@ onMount(() => {
 		}
 	});
 
-	addEventListener(
-		"mouseleave",
-		(e) => {
-			const el = e.target as HTMLElement | SVGSVGElement;
-			const tooltipData = el?.dataset?.tooltip;
-			const [visible_, node] = visible;
-			if (tooltipData) {
-				if (visible_ && node == el) {
-					visible = [false, null];
+	for (const event of ["mouseleave", "mouseout"]) {
+		addEventListener(
+			event,
+			(e) => {
+				const el = e.target as HTMLElement | SVGSVGElement;
+				const tooltipData = el?.dataset?.tooltip;
+				const [visible_, node] = visible;
+				if (tooltipData) {
+					if (visible_ && node == el) {
+						visible = [false, null];
+					}
+				} else if (el instanceof SVGPathElement && el.getAttribute("name")) {
+					if (visible_ && node == el) {
+						visible = [false, null];
+					}
 				}
-			} else if (el instanceof SVGPathElement && el.getAttribute("name")) {
-				if (visible_ && node == el) {
-					visible = [false, null];
-				}
-			}
-		},
-		true,
-	);
+			},
+			true,
+		);
+	}
 	addEventListener(
 		"scroll",
 		() => {
