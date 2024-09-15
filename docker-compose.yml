@@ -1,0 +1,23 @@
+services:
+  server:
+    build: .
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    ports: ["${PORT:-3000}:3000"]
+    environment: [CLICKHOUSE_URL=http://clickhouse:8123]
+    volumes:
+      - ./.keys:/app/.keys
+  clickhouse:
+    privileged: true
+    restart: unless-stopped
+    image: clickhouse/clickhouse-server
+    volumes:
+      - ./.backups:/backups
+      - ./.clickhouse/data/:/var/lib/clickhouse/
+      - ./.clickhouse/logs/:/var/log/clickhouse-server/
+      - ./backup_disk.xml:/etc/clickhouse-server/config.d/backup_disk.xml
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144

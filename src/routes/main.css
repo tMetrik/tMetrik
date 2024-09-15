@@ -1,0 +1,30 @@
+:root {
+  --background: #eee;
+  --foreground: #000;
+  --primary: #03a1fc;
+  --secondary: #fff;
+  --tertiary: #0005;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000;
+    --foreground: #fff;
+    --primary: #03a1fc;
+    --secondary: #191919;
+    --tertiary: #fff5;
+  }
+}
+
+html,
+body {
+  overflow: hidden !important;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: InterVariable, system-ui, sans-serif;
+}

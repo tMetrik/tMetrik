@@ -1,0 +1,3 @@
+[submodule "src/lib/core"]
+	path = src/lib/core
+	url = git@github.com:tMetrik/core.git
