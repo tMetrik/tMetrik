@@ -1,10 +1,10 @@
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 import { getUsers } from "./_utils";
-import { constructUser, type User } from "./most_popular_user";
+import { constructUser } from "./most_popular_user";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
-  "from",
+  from,
   from_bot,
   from_username,
   from_firstname,
@@ -13,11 +13,11 @@ SELECT
   from_premium,
   from_type,
   from_title
-FROM updates_view
+FROM ${view}
 ORDER BY timestamp DESC
 LIMIT 1
 `;
 
-export async function getLastUser(): Promise<User> {
-	return constructUser((await getUsers(query))[0]);
-}
+export default defineFetcher(async (view) => {
+	return constructUser((await getUsers(query(view)))[0]);
+});

@@ -1,22 +1,23 @@
 import { UpdateType } from "$lib/core/entry/update_type";
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
   "type",
   count(*) AS count
-FROM updates_view
+FROM ${view}
 WHERE "type" IN (
   SELECT DISTINCT "type"
-  FROM updates_view
+  FROM ${view}
 )
 GROUP BY "type"
 ORDER BY count DESC
 LIMIT 1
 `;
-export async function getMostPopularUpdateType() {
-	const result = await client.query({ query });
+
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	const x = +(await result.json<{ type: string; count: string }>()).data[0]?.type || 0;
 	return UpdateType[x];
-}
+});

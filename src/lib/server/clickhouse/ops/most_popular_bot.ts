@@ -1,17 +1,17 @@
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
   "to",
   to_username,
   to_firstname,
   to_lastname,
   count(*) AS count
-FROM updates_view
+FROM ${view}
 WHERE "to" IN (
   SELECT DISTINCT "to"
-  FROM updates_view
+  FROM ${view}
 )
 GROUP BY
   "to",
@@ -21,8 +21,8 @@ GROUP BY
 ORDER BY to_username DESC, count DESC
 LIMIT 1
 `;
-export async function getMostPopularBot() {
-	const result = await client.query({ query });
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	const entry = (
 		await result.json<{
 			to: string;
@@ -38,4 +38,4 @@ export async function getMostPopularBot() {
 		firstName: entry.to_firstname ?? "",
 		lastName: entry.to_lastname ?? "",
 	};
-}
+});

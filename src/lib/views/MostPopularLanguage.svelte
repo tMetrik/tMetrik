@@ -2,21 +2,21 @@
 import Card from "$lib/components/Card.svelte";
 import CardTitle from "$lib/components/CardTitle.svelte";
 import CardValue from "$lib/components/CardValue.svelte";
-import type { FetcherResult } from "$lib/server/clickhouse/ops/_ops";
 import type { ComponentProps } from "svelte";
+import type { FetcherResult } from "./_utils";
 
 interface $$Props extends ComponentProps<Card> {
-	data: FetcherResult<"getMostPopularMessageType">;
+	data: FetcherResult<"most_popular_language">;
 }
 
 export let data: $$Props["data"];
 
-$: type = data;
+$: lang = data;
 </script>
 
 <Card {...$$restProps}>
-	<CardTitle>Most Popular Message Type</CardTitle>
+	<CardTitle>Most Popular Language</CardTitle>
 	<CardValue>
-		{type}
+		{lang}
 	</CardValue>
 </Card>

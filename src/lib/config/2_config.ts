@@ -1,4 +1,4 @@
-import { views } from "$lib/views";
+import views from "$lib/views/_views";
 import { writable } from "svelte/store";
 import type { Config } from "./0_types";
 import { reloadViewStates } from "./1_view_states";
@@ -6,30 +6,30 @@ import { reloadViewStates } from "./1_view_states";
 export const config = writable<Config>([]);
 
 export const DEFAULT_CONFIG: Config = [
-	["getLastUpdate", "getLastUser", "getUsersByEngagement"],
-	["getMostPopularUpdateType", "getMostPopularUser", "getLanguagesByUsers"],
+	["updates_last", "updates_last_user", "users_by_engagement"],
+	["most_popular_update_type", "most_popular_user", "languages_by_users"],
 	[
-		"countUpdates",
-		"countUsers",
-		"getBotsByEngagement",
+		"count_updates",
+		"count_users",
+		"bots_by_engagement",
 	],
 	[
-		"getMostPopularMessageType",
-		"countMessages",
-		"getLastInlineQuery",
+		"most_popular_message_type",
+		"count_messages",
+		"updates_last_inline_query",
 	],
 	[
-		"getMostPopularChatType",
-		"countCallbackQueries",
-		"getLastCallbackQuery",
+		"most_popular_chat_type",
+		"count_callback_queries",
+		"updates_last_callback_query",
 	],
 	[
-		"getMostPopularLanguage",
-		"countInlineQueries",
+		"most_popular_language",
+		"count_inline_queries",
 	],
 	[
-		"getMostPopularBot",
-		"countInlineFeedbacks",
+		"most_popular_bot",
+		"count_inline_feedbacks",
 	],
 ];
 

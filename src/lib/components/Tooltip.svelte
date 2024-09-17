@@ -181,8 +181,8 @@ function maybeFormattedLanguageCode(languageCode: string) {
 		/>
 		<ConditionalField
 			name="Engagements"
-			value={"count" in data ? numberFormat.format(data.count) : "N/A"}
-			hideIf={!("count" in data)}
+			value={"count_" in data ? numberFormat.format(data.count) : "N/A"}
+			hideIf={!("count_" in data)}
 		/>
 	{/if}
 	{#if data && data._ == "text"}

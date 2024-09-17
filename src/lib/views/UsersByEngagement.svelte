@@ -2,33 +2,32 @@
 import Card from "$lib/components/Card.svelte";
 import MoveableViewWrapper from "$lib/components/MoveableViewWrapper.svelte";
 import Title from "$lib/components/Title.svelte";
-import type { FetcherResult } from "$lib/server/clickhouse/ops/_ops";
 import type { ComponentProps } from "svelte";
-import { formatFrom } from "./_utils";
+import type { FetcherResult } from "./_utils";
+import { formatFrom, numberFormat } from "./_utils";
 
 interface $$Props extends ComponentProps<Card> {
-	data: FetcherResult<"getBotsByEngagement">;
+	data: FetcherResult<"users_by_engagement">;
 }
 
 export let data: $$Props["data"];
 
-$: bots = data;
+$: users = data;
 </script>
 
 <MoveableViewWrapper {...$$restProps}>
-	<Title>Top Bots</Title>
-	{#each bots as bot, i (bot.id)}
+	<Title>Top 50 Users</Title>
+	{#each users as user, i (user.id)}
 		<Card flexibleHeight compact static>
 			<div style="font-size: 16px">
 				{(i + 1 + "").padStart(2, "0")}.{" "}
 				<span
 					data-tooltip={JSON.stringify({
 						_: "userInfo",
-						...bot,
-						bot: true,
+						...user,
 					})}
 				>
-					{formatFrom(bot)}
+					{formatFrom(user)}
 				</span>
 			</div>
 		</Card>

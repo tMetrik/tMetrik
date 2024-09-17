@@ -1,9 +1,8 @@
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 import { getUsers } from "./_utils";
 import { constructUser, type User } from "./most_popular_user";
 
-const query = (limit: number) =>
-	sql`
+const query = (view: string, limit: number) => `
 SELECT
   "from",
   from_bot,
@@ -16,9 +15,9 @@ SELECT
   from_title,
   count(*) AS count
 FROM
-  updates_view
+  ${view}
 WHERE "from" IN (
-  SELECT DISTINCT "from" FROM updates_view
+  SELECT DISTINCT "from" FROM ${view}
 )
 GROUP BY
   "from",
@@ -36,8 +35,8 @@ LIMIT ${limit}
 
 export type UserWithEngagementCount = User & { count: number };
 
-export async function getUsersByEngagement(): Promise<UserWithEngagementCount[]> {
-	const entries = await getUsers<{ count: number }>(query(50));
+export default defineFetcher<UserWithEngagementCount[]>(async (view) => {
+	const entries = await getUsers<{ count: number }>(query(view, 50));
 	const results = new Array<UserWithEngagementCount>();
 	for (const entry of entries) {
 		results.push({
@@ -46,4 +45,4 @@ export async function getUsersByEngagement(): Promise<UserWithEngagementCount[]>
 		});
 	}
 	return results;
-}
+});

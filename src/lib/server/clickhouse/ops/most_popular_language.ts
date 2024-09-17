@@ -1,20 +1,21 @@
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT DISTINCT
     from_languagecode,
     count(timestamp) AS count
-FROM updates_view
+FROM ${view}
 WHERE from_languagecode != ''
 GROUP BY from_languagecode
 ORDER BY count DESC
 LIMIT 1
 `;
-export async function getMostPopularLanguage() {
-	const result = await client.query({ query });
+
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	return (
 		(await result.json<{ from_languagecode: string; count: string }>()).data[0]
 			?.from_languagecode || "N/A"
 	);
-}
+});

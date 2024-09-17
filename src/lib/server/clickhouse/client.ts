@@ -2,7 +2,6 @@ import { ChatMemberStatus } from "$lib/core/entry/chat_member_status";
 import { ChatType } from "$lib/core/entry/chat_type";
 import { MessageType } from "$lib/core/entry/message_type";
 import { createClient } from "@clickhouse/client";
-import { sql } from "./sql";
 
 const Enum = (enum_: Record<never, never>) =>
 	"Enum("
@@ -194,17 +193,18 @@ ALTER TABLE ${prefix}updates ADD COLUMN IF NOT EXISTS to_username String
 		.join(", ");
 
 	await client.query({
-		query: sql`DROP VIEW IF EXISTS ${prefix}updates_view;`,
+		query: `DROP VIEW IF EXISTS ${prefix}updates_view;`,
 	});
 
 	await client.query({
-		query: sql`
-CREATE VIEW ${prefix}updates_view
+		query: `
+CREATE VIEW
+${prefix}updates_view
 AS
 SELECT ${ALL_FIELDS}
 FROM updates
 GROUP BY ${ALL_FIELDS}
-ORDER BY "timestamp" DESC
+ORDER BY timestamp DESC
 `,
 	});
 }

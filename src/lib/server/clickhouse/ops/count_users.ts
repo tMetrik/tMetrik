@@ -1,12 +1,12 @@
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT COUNT(DISTINCT "from") AS count
-FROM updates_view
+FROM ${view}
 `;
 
-export async function countUsers() {
-	const result = await client.query({ query });
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	return +(await result.json<{ count: string }>()).data[0]?.count;
-}
+});
