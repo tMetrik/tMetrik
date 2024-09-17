@@ -1,6 +1,7 @@
 import { client } from "$lib/server/clickhouse/client";
+import { defineFetcher } from "./_types";
 
-const query = `
+const query = (view: string) => `
 SELECT DISTINCT
     from_languagecode,
     count(from) AS count
@@ -9,7 +10,7 @@ FROM
     SELECT DISTINCT
         from,
         from_languagecode
-    FROM updates_view
+    FROM ${view}
     WHERE from_languagecode != ''
     GROUP BY
         from,
@@ -24,10 +25,10 @@ interface Language {
 	userCount: number;
 }
 
-export async function getLanguagesByUsers(): Promise<Language[]> {
+export default defineFetcher<Language[]>(async (view) => {
 	const entries = (
 		await (
-			await client.query({ query })
+			await client.query({ query: query(view) })
 		).json<{ from_languagecode: string; count: number }>()
 	).data;
 	const results = new Array<Language>();
@@ -38,4 +39,4 @@ export async function getLanguagesByUsers(): Promise<Language[]> {
 		});
 	}
 	return results;
-}
+});

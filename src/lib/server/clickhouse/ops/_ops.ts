@@ -1,51 +1,41 @@
-import { getBotsByEngagement } from "./bots_by_engagement";
-import { getChartDataChatTypes } from "./chart_data_chat_types";
-import { getChartDataMessageTypes } from "./chart_data_message_types";
-import { getChartDataUpdateTypes } from "./chart_data_update_types";
-import { countCallbackQueries } from "./count_callback_queries";
-import { countInlineFeedbacks } from "./count_inline_feedbacks";
-import { countInlineQueries } from "./count_inline_queries";
-import { countMessages } from "./count_messages";
-import { countUpdates } from "./count_updates";
-import { countUsers } from "./count_users";
-import { getLanguagesByUsers } from "./languages_by_users";
-import { getMostPopularBot } from "./most_popular_bot";
-import { getMostPopularChatType } from "./most_popular_chat_type";
-import { getMostPopularLanguage } from "./most_popular_language";
-import { getMostPopularMessageType } from "./most_popular_message_type";
-import { getMostPopularUpdateType } from "./most_popular_update_type";
-import { getMostPopularUser } from "./most_popular_user";
-import { getLastUpdate } from "./updates_last";
-import { getLastCallbackQuery } from "./updates_last_callback_query";
-import { getLastInlineQuery } from "./updates_last_inline_query";
-import { getLastUser } from "./updates_last_user";
-import { getUsersByEngagement } from "./users_by_engagement";
+import bots_by_engagement from "./bots_by_engagement";
+import count_callback_queries from "./count_callback_queries";
+import count_inline_feedbacks from "./count_inline_feedbacks";
+import count_inline_queries from "./count_inline_queries";
+import count_messages from "./count_messages";
+import count_updates from "./count_updates";
+import count_users from "./count_users";
+import languages_by_users from "./languages_by_users";
+import most_popular_bot from "./most_popular_bot";
+import most_popular_chat_type from "./most_popular_chat_type";
+import most_popular_language from "./most_popular_language";
+import most_popular_message_type from "./most_popular_message_type";
+import most_popular_update_type from "./most_popular_update_type";
+import most_popular_user from "./most_popular_user";
+import updates_last from "./updates_last";
+import updates_last_callback_query from "./updates_last_callback_query";
+import updates_last_inline_query from "./updates_last_inline_query";
+import updates_last_user from "./updates_last_user";
+import users_by_engagement from "./users_by_engagement";
 
-export const fetchers = {
-	getMostPopularUser,
-	getMostPopularBot,
-	getMostPopularUpdateType,
-	getMostPopularMessageType,
-	getMostPopularChatType,
-	countUsers,
-	countUpdates,
-	countMessages,
-	countInlineQueries,
-	countCallbackQueries,
-	countInlineFeedbacks,
-	getLastUpdate,
-	getLastUser,
-	getLastInlineQuery,
-	getLastCallbackQuery,
-	getUsersByEngagement,
-	getBotsByEngagement,
-	getMostPopularLanguage,
-	getLanguagesByUsers,
-	getChartDataUpdateTypes,
-	getChartDataMessageTypes,
-	getChartDataChatTypes,
+export default {
+	bots_by_engagement,
+	count_callback_queries,
+	count_inline_feedbacks,
+	count_inline_queries,
+	count_messages,
+	count_updates,
+	count_users,
+	languages_by_users,
+	most_popular_bot,
+	most_popular_chat_type,
+	most_popular_language,
+	most_popular_message_type,
+	most_popular_update_type,
+	most_popular_user,
+	updates_last,
+	updates_last_callback_query,
+	updates_last_inline_query,
+	updates_last_user,
+	users_by_engagement,
 };
-
-export type Fetchers = typeof fetchers;
-export type Fetcher = keyof Fetchers;
-export type FetcherResult<T extends Fetcher> = Awaited<ReturnType<Fetchers[T]>>;

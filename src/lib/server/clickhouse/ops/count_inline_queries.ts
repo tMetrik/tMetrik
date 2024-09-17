@@ -1,19 +1,19 @@
 import { UpdateType } from "$lib/core/entry/update_type";
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
   COUNT(timestamp) as count
 FROM
-  updates_view
+  ${view}
 WHERE
   inlinequery_id != ''
 AND
   "type" = ${UpdateType.InlineQuery}
 `;
 
-export async function countInlineQueries() {
-	const result = await client.query({ query });
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	return +(await result.json<{ count: string }>()).data[0]?.count;
-}
+});

@@ -7,9 +7,10 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && dprint check",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && dprint check && npm run validate",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "fmt": "dprint fmt"
+    "fmt": "dprint fmt",
+    "validate": "node validate/_ALL.mjs"
   },
   "devDependencies": {
     "@sveltejs/kit": "^2.0.0",

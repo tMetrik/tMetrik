@@ -124,7 +124,7 @@ ALTER TABLE ${prefix}updates ADD COLUMN IF NOT EXISTS to_lastname String;
 ALTER TABLE ${prefix}updates ADD COLUMN IF NOT EXISTS to_username String
   `.split(";")
 	) {
-		await client.query({ query });
+		await client.query({ query: query(view) });
 	}
 
 	const ALL_FIELDS = [
@@ -194,11 +194,11 @@ ALTER TABLE ${prefix}updates ADD COLUMN IF NOT EXISTS to_username String
 		.join(", ");
 
 	await client.query({
-		query: sql`DROP VIEW IF EXISTS ${prefix}updates_view;`,
+		query: `DROP VIEW IF EXISTS ${prefix}updates_view;`,
 	});
 
 	await client.query({
-		query: sql`
+		query: `
 CREATE VIEW ${prefix}updates_view
 AS
 SELECT ${ALL_FIELDS}

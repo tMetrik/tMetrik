@@ -1,12 +1,15 @@
-import type { FetcherResult } from "$lib/server/clickhouse/ops/_ops";
+import fetchers from "$lib/server/clickhouse/ops/_ops";
 import type { User } from "$lib/server/clickhouse/ops/most_popular_user";
+
+export type Fetcher = keyof typeof fetchers;
+export type FetcherResult<T extends Fetcher> = Awaited<ReturnType<(typeof fetchers)[T]>>;
 
 export const idFormat = new Intl.NumberFormat("ru");
 
 export const numberFormat = new Intl.NumberFormat();
 
 const ACCEPTIBLE_NAME = /^[ЁёА-яA-Za-z ]$/;
-export function formatFrom(user: User | FetcherResult<"getMostPopularBot">) {
+export function formatFrom(user: User | FetcherResult<"most_popular_bot">) {
 	if (user.username) {
 		return "@" + user.username;
 	}

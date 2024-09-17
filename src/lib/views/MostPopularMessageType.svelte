@@ -2,27 +2,21 @@
 import Card from "$lib/components/Card.svelte";
 import CardTitle from "$lib/components/CardTitle.svelte";
 import CardValue from "$lib/components/CardValue.svelte";
-import Muted from "$lib/components/Muted.svelte";
-import type { FetcherResult } from "$lib/server/clickhouse/ops/_ops";
 import type { ComponentProps } from "svelte";
-import { format } from "timeago.js";
+import type { FetcherResult } from "./_utils";
 
 interface $$Props extends ComponentProps<Card> {
-	data: FetcherResult<"getLastUpdate">;
+	data: FetcherResult<"most_popular_message_type">;
 }
 
 export let data: $$Props["data"];
 
-$: lastUpdate = data;
+$: type = data;
 </script>
 
 <Card {...$$restProps}>
-	<CardTitle>Last Update</CardTitle>
+	<CardTitle>Most Popular Message Type</CardTitle>
 	<CardValue>
-		{#if lastUpdate != null}
-			{format(new Date(lastUpdate), "en_US")}
-		{:else}
-			<Muted>N/A</Muted>
-		{/if}
+		{type}
 	</CardValue>
 </Card>

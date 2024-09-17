@@ -2,24 +2,26 @@
 import Card from "$lib/components/Card.svelte";
 import CardTitle from "$lib/components/CardTitle.svelte";
 import CardValue from "$lib/components/CardValue.svelte";
-import type { FetcherResult } from "$lib/server/clickhouse/ops/_ops";
+import Muted from "$lib/components/Muted.svelte";
 import type { ComponentProps } from "svelte";
-import { formatFrom } from "./_utils";
+import type { FetcherResult } from "./_utils";
 
 interface $$Props extends ComponentProps<Card> {
-	data: FetcherResult<"getMostPopularBot">;
+	data: FetcherResult<"updates_last_callback_query">;
 }
 
 export let data: $$Props["data"];
 
-$: mostPopularBot = data;
+$: lastCallbackQuery = data.trim();
 </script>
 
 <Card {...$$restProps}>
-	<CardTitle>Most Popular Bot</CardTitle>
-	<CardValue
-		data-tooltip={JSON.stringify({ _: "userInfo", ...mostPopularBot, bot: true })}
-	>
-		{formatFrom(mostPopularBot)}
+	<CardTitle>Last Callback Query</CardTitle>
+	<CardValue>
+		{#if lastCallbackQuery}
+			{lastCallbackQuery}
+		{:else}
+			<Muted>N/A</Muted>
+		{/if}
 	</CardValue>
 </Card>

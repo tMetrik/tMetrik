@@ -1,20 +1,20 @@
 import { client } from "$lib/server/clickhouse/client";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
   timestamp
 FROM
-  updates_view
+  ${view}
 ORDER BY timestamp DESC
 LIMIT 1
 `;
 
-export async function getLastUpdate() {
-	const result = await client.query({ query });
+export default defineFetcher(async (view) => {
+	const result = await client.query({ query: query(view) });
 	const data = (await result.json<{ timestamp: string }>()).data;
 	if (!data.length) {
 		return null;
 	}
 	return data[0].timestamp;
-}
+});

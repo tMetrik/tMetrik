@@ -1,10 +1,10 @@
 import { ChatType } from "$lib/core/entry/chat_type";
-import { sql } from "../sql";
+import { defineFetcher } from "./_types";
 import { getUsers, type UserRaw } from "./_utils";
 
-const query = sql`
+const query = (view: string) => `
 SELECT
-  "from",
+  from,
   from_bot,
   from_username,
   from_firstname,
@@ -14,9 +14,9 @@ SELECT
   from_type,
   from_title,
   count(*) AS count
-FROM updates_view
+FROM ${view}
 GROUP BY
-    "from",
+    from,
     from_bot,
     from_username,
     from_firstname,
@@ -54,6 +54,7 @@ export function constructUser(entry: UserRaw): User {
 		title: entry?.from_title ?? "",
 	};
 }
-export async function getMostPopularUser(): Promise<User> {
-	return constructUser((await getUsers(query))[0]);
-}
+
+export default defineFetcher(async (view) => {
+	return constructUser((await getUsers(query(view)))[0]);
+});

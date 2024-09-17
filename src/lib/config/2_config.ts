@@ -7,29 +7,29 @@ export const config = writable<Config>([]);
 
 export const DEFAULT_CONFIG: Config = [
 	["getLastUpdate", "getLastUser", "getUsersByEngagement"],
-	["getMostPopularUpdateType", "getMostPopularUser", "getLanguagesByUsers"],
+	["most_popular_updatetype", "most_popular_user", "getLanguagesByUsers"],
 	[
-		"countUpdates",
-		"countUsers",
+		"count_updates",
+		"count_users",
 		"getBotsByEngagement",
 	],
 	[
-		"getMostPopularMessageType",
-		"countMessages",
+		"most_popular_messagetype",
+		"count_messages",
 		"getLastInlineQuery",
 	],
 	[
-		"getMostPopularChatType",
-		"countCallbackQueries",
+		"most_popular_chattype",
+		"count_callbackQueries",
 		"getLastCallbackQuery",
 	],
 	[
-		"getMostPopularLanguage",
-		"countInlineQueries",
+		"most_popular_language",
+		"count_inlineQueries",
 	],
 	[
-		"getMostPopularBot",
-		"countInlineFeedbacks",
+		"most_popular_bot",
+		"count_inlineFeedbacks",
 	],
 ];
 
