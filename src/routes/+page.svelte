@@ -106,25 +106,4 @@ onMount(() => {
     text-decoration-color: var(--primary);
   }
 }
-
-.delete-area {
-  position: fixed;
-  bottom: 16;
-  left: 50%;
-  transform: translateX(-50%);
-  backdrop-filter: blur(6px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 64px;
-  border: 1px solid #eb4034;
-  color: #eb4034;
-  user-select: none;
-  z-index: 9999;
-}
-
-.delete-area_drag-over {
-  background-color: #eb4034;
-  color: white;
-}
 </style>
