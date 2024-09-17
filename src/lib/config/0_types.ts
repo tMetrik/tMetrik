@@ -1,4 +1,4 @@
-import type { Fetcher } from "$lib/server/clickhouse/ops/_ops";
+import type { Fetcher } from "$lib/views/_utils";
 
 export type Config = Fetcher[][];
 

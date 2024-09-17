@@ -28,7 +28,7 @@ interface View<T extends Fetcher = Fetcher> {
 	>;
 }
 
-export const views: View[] = [
+const views: View[] = [
 	{
 		fetcher: "bots_by_engagement",
 		component: BotsByEngagement,
@@ -106,3 +106,5 @@ export const views: View[] = [
 		component: UsersByEngagement,
 	},
 ];
+
+export default views;

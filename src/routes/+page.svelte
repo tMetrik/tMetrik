@@ -3,8 +3,8 @@ import CardCol from "$lib/components/CardCol.svelte";
 import Onboarding from "$lib/components/Onboarding.svelte";
 import { viewStates } from "$lib/config/1_view_states";
 import { config } from "$lib/config/2_config";
-import type { Fetcher } from "$lib/server/clickhouse/ops/_ops";
-import { views } from "$lib/views";
+import type { Fetcher } from "$lib/views/_utils";
+import views from "$lib/views/_views";
 import { onMount } from "svelte";
 
 let fetching = false;

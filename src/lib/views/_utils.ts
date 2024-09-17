@@ -1,4 +1,4 @@
-import fetchers from "$lib/server/clickhouse/ops/_ops";
+import type fetchers from "$lib/server/clickhouse/ops/_ops";
 import type { User } from "$lib/server/clickhouse/ops/most_popular_user";
 
 export type Fetcher = keyof typeof fetchers;

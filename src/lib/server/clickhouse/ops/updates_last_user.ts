@@ -1,6 +1,6 @@
 import { defineFetcher } from "./_types";
 import { getUsers } from "./_utils";
-import { constructUser, type User } from "./most_popular_user";
+import { constructUser } from "./most_popular_user";
 
 const query = (view: string) => `
 SELECT

@@ -61,7 +61,6 @@ function onDragEnd(e: DragEvent) {
 	}
 	const state = getState(pos2);
 	if (state.dragOverBottom) {
-		console.log("drag over btm");
 		moveToBottom(pos1, pos2);
 	} else if (state.dragOverTop) {
 		moveToTop(pos1, pos2);

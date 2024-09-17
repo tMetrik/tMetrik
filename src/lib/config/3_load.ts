@@ -1,4 +1,4 @@
-import views from "$lib/views";
+import views from "$lib/views/_views";
 import type { Config } from "./0_types";
 import { reloadViewStates } from "./1_view_states";
 import { config, DEFAULT_CONFIG } from "./2_config";

@@ -38,7 +38,7 @@ let array = `interface View<T extends Fetcher = Fetcher> {
 	>;
 }
 
-export const views: View[] = [
+const views: View[] = [
 `;
 
 for (const slug of getOpSlugs()) {
@@ -54,4 +54,4 @@ for (const slug of getOpSlugs()) {
 
 array += "];\n";
 
-writeFileSync(`./src/lib/views/_views.ts`, imports + "\n" + array);
+writeFileSync(`./src/lib/views/_views.ts`, imports + "\n" + array + "\nexport default views;\n");

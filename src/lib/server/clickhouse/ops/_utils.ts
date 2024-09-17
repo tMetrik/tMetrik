@@ -15,7 +15,7 @@ export interface UserRaw {
 export async function getUsers<T = {}, X extends UserRaw & T = UserRaw & T>(
 	query: string,
 ): Promise<X[]> {
-	const result = await client.query({ query: query(view) });
+	const result = await client.query({ query });
 	return (await result.json<X>()).data;
 }
 
