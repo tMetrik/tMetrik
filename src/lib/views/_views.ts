@@ -29,82 +29,82 @@ interface View<T extends Fetcher = Fetcher> {
 }
 
 const views: View[] = [
-	{
-		fetcher: "bots_by_engagement",
-		component: BotsByEngagement,
-	},
-	{
-		fetcher: "count_callback_queries",
-		component: CountCallbackQueries,
-	},
-	{
-		fetcher: "count_inline_feedbacks",
-		component: CountInlineFeedbacks,
-	},
-	{
-		fetcher: "count_inline_queries",
-		component: CountInlineQueries,
-	},
-	{
-		fetcher: "count_messages",
-		component: CountMessages,
-	},
-	{
-		fetcher: "count_updates",
-		component: CountUpdates,
-	},
-	{
-		fetcher: "count_users",
-		component: CountUsers,
-	},
-	{
-		fetcher: "languages_by_users",
-		component: LanguagesByUsers,
-	},
-	{
-		fetcher: "most_popular_bot",
-		component: MostPopularBot,
-	},
-	{
-		fetcher: "most_popular_chat_type",
-		component: MostPopularChatType,
-	},
-	{
-		fetcher: "most_popular_language",
-		component: MostPopularLanguage,
-	},
-	{
-		fetcher: "most_popular_message_type",
-		component: MostPopularMessageType,
-	},
-	{
-		fetcher: "most_popular_update_type",
-		component: MostPopularUpdateType,
-	},
-	{
-		fetcher: "most_popular_user",
-		component: MostPopularUser,
-	},
-	{
-		fetcher: "updates_last",
-		component: UpdatesLast,
-	},
-	{
-		fetcher: "updates_last_callback_query",
-		component: UpdatesLastCallbackQuery,
-	},
-	{
-		fetcher: "updates_last_inline_query",
-		component: UpdatesLastInlineQuery,
-	},
-	{
-		fetcher: "updates_last_user",
-		component: UpdatesLastUser,
-	},
-	{
-		fetcher: "users_by_engagement",
-		component: UsersByEngagement,
-	},
+{
+	fetcher: "bots_by_engagement",
+	component: BotsByEngagement,
+},
+{
+	fetcher: "count_callback_queries",
+	component: CountCallbackQueries,
+},
+{
+	fetcher: "count_inline_feedbacks",
+	component: CountInlineFeedbacks,
+},
+{
+	fetcher: "count_inline_queries",
+	component: CountInlineQueries,
+},
+{
+	fetcher: "count_messages",
+	component: CountMessages,
+},
+{
+	fetcher: "count_updates",
+	component: CountUpdates,
+},
+{
+	fetcher: "count_users",
+	component: CountUsers,
+},
+{
+	fetcher: "languages_by_users",
+	component: LanguagesByUsers,
+},
+{
+	fetcher: "most_popular_bot",
+	component: MostPopularBot,
+},
+{
+	fetcher: "most_popular_chat_type",
+	component: MostPopularChatType,
+},
+{
+	fetcher: "most_popular_language",
+	component: MostPopularLanguage,
+},
+{
+	fetcher: "most_popular_message_type",
+	component: MostPopularMessageType,
+},
+{
+	fetcher: "most_popular_update_type",
+	component: MostPopularUpdateType,
+},
+{
+	fetcher: "most_popular_user",
+	component: MostPopularUser,
+},
+{
+	fetcher: "updates_last",
+	component: UpdatesLast,
+},
+{
+	fetcher: "updates_last_callback_query",
+	component: UpdatesLastCallbackQuery,
+},
+{
+	fetcher: "updates_last_inline_query",
+	component: UpdatesLastInlineQuery,
+},
+{
+	fetcher: "updates_last_user",
+	component: UpdatesLastUser,
+},
+{
+	fetcher: "users_by_engagement",
+	component: UsersByEngagement,
+},
 ];
 
 export default views;

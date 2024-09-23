@@ -1,7 +1,8 @@
 import { client } from "$lib/server/clickhouse/client";
 import { defineFetcher } from "./_types";
 
-const query = (view: string) => `
+const query = (view: string, prefix: string) => `
+${prefix}
 SELECT
   "to",
   to_username,
@@ -21,8 +22,8 @@ GROUP BY
 ORDER BY to_username DESC, count DESC
 LIMIT 1
 `;
-export default defineFetcher(async (view) => {
-	const result = await client.query({ query: query(view) });
+export default defineFetcher(async (view, prefix) => {
+	const result = await client.query({ query: query(view, prefix) });
 	const entry = (
 		await result.json<{
 			to: string;

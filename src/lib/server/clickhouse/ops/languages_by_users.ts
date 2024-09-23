@@ -1,7 +1,8 @@
 import { client } from "$lib/server/clickhouse/client";
 import { defineFetcher } from "./_types";
 
-const query = (view: string) => `
+const query = (view: string, prefix: string) => `
+${prefix}
 SELECT DISTINCT
     from_languagecode,
     count(from) AS count
@@ -25,10 +26,10 @@ interface Language {
 	userCount: number;
 }
 
-export default defineFetcher<Language[]>(async (view) => {
+export default defineFetcher<Language[]>(async (view, prefix) => {
 	const entries = (
 		await (
-			await client.query({ query: query(view) })
+			await client.query({ query: query(view, prefix) })
 		).json<{ from_languagecode: string; count: number }>()
 	).data;
 	const results = new Array<Language>();

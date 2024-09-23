@@ -2,7 +2,8 @@ import { defineFetcher } from "./_types";
 import { getUsers } from "./_utils";
 import type { User } from "./most_popular_user";
 
-const query = (view: string, limit: number) => `
+const query = (view: string, prefix: string, limit: number) => `
+${prefix}
 SELECT
   to,
   to_firstname,
@@ -25,14 +26,14 @@ LIMIT ${limit}
 
 export type UserWithEngagementCount = User & { count: number };
 
-export default defineFetcher(async (view) => {
+export default defineFetcher(async (view, prefix) => {
 	const entries = await getUsers<{
 		to: string;
 		to_username: string;
 		to_firstname: string;
 		to_lastname: string;
 		count: string;
-	}>(query(view, 50));
+	}>(query(view, prefix, 50));
 	const results = new Array<{ id: number; username: string; firstName: string; lastName: string; count: number }>();
 	for (const entry of entries) {
 		results.push({

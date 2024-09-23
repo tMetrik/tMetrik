@@ -2,7 +2,8 @@ import { defineFetcher } from "./_types";
 import { getUsers } from "./_utils";
 import { constructUser } from "./most_popular_user";
 
-const query = (view: string) => `
+const query = (view: string, prefix: string) => `
+${prefix}
 SELECT
   from,
   from_bot,
@@ -18,6 +19,6 @@ ORDER BY timestamp DESC
 LIMIT 1
 `;
 
-export default defineFetcher(async (view) => {
-	return constructUser((await getUsers(query(view)))[0]);
+export default defineFetcher(async (view, prefix) => {
+	return constructUser((await getUsers(query(view, prefix)))[0]);
 });
