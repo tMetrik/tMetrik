@@ -2,7 +2,8 @@ import { ChatType } from "$lib/core/entry/chat_type";
 import { defineFetcher } from "./_types";
 import { getUsers, type UserRaw } from "./_utils";
 
-const query = (view: string) => `
+const query = (view: string, prefix: string) => `
+${prefix}
 SELECT
   from,
   from_bot,
@@ -55,6 +56,6 @@ export function constructUser(entry: UserRaw): User {
 	};
 }
 
-export default defineFetcher(async (view) => {
-	return constructUser((await getUsers(query(view)))[0]);
+export default defineFetcher(async (view, prefix) => {
+	return constructUser((await getUsers(query(view, prefix)))[0]);
 });
